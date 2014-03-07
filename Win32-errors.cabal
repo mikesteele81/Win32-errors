@@ -1,0 +1,30 @@
+name:                Win32-errors
+version:             0.1.0.0
+synopsis:            Error handling for Win32 foreign calls
+description:         Error handling for Win32 foreign calls
+license:             BSD3
+license-file:        LICENSE
+author:              Michael Steele
+maintainer:          mikesteele81@gmail.com
+copyright:           Michael Steele, 2014
+category:            System
+build-type:          Simple
+cabal-version:       >=1.16
+extra-source-files:
+    include/windows_cconv.h
+
+library
+    default-language: Haskell2010
+    ghc-options: -Wall
+    cc-options:  -fno-strict-aliasing
+    build-depends:
+          base             >= 4.5 && < 4.9
+        , template-haskell >= 2.8 && < 2.9
+        , text             >= 0.8 && < 1.2
+        , Win32            >= 2.2 && < 2.4
+    exposed-modules:
+        System.Win32.Errors
+    other-modules:
+        System.Win32.Errors.Types
+        System.Win32.Errors.TH
+    include-dirs: include
