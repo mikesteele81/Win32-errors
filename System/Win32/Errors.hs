@@ -1,13 +1,14 @@
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell #-}
 
 module System.Win32.Errors
   ( ErrCode (..)
-  , Win32Error (..)
-  , tryWin32
   , toDWORD
   , fromDWORD
+  , Win32Error (..)
+  , tryWin32
   , failIfFalse_
   , failIf
   , errorWin
@@ -19,6 +20,7 @@ import Data.Bits
 import Data.Char
 import Data.Text as T
 import Data.Text.Foreign as T
+import Data.Typeable
 import Foreign
 import Numeric
 import System.Win32 (DWORD)
@@ -26,23 +28,24 @@ import qualified System.Win32 as Win32
 
 import System.Win32.Errors.Foreign
 import System.Win32.Errors.TH
-import System.Win32.Errors.Types
 
--- Generate toDWORD and fromDWORD. This produces something like the following:
---     fromDWORD :: DWORD -> ErrCode
---     fromDWORD 0 = ErrorSuccess
---     fromDWORD # = ErrorSomethingElse
---     fromDWORD # = ErrorSomethingElse
---     fromDWORD # = ErrorSomethingElse
---     fromDWORD x = ErrorOther x
---
---     toDWORD :: ErrCode -> DWORD
---     toDWORD (ErrorOther x) = x
---     toDWORD errorSomethingElse = #
---     toDWORD errorSomethingElse = #
---     toDWORD errorSomethingElse = #
-genConvert [ (0, ErrorSuccess)
-           ]
+-- |A type of error
+genErrCode
+
+-- |gentoDWORD
+gentoDWORD
+
+-- |genfromDWORD
+genfromDWORD
+
+data Win32Error = Win32Error
+    { function :: Text
+    , errCode  :: ErrCode
+    , systemMessage :: Text
+    } deriving (Typeable, Show)
+
+instance Exception Win32Error
+
 tryWin32 :: IO a -> IO (Either Win32Error a)
 tryWin32 = try
 
