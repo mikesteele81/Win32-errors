@@ -114,4 +114,4 @@ formatMessage err =
     pBuffer <- peek ppBuffer
     if (len == 0 || pBuffer == nullPtr)
        then return $ "Error 0x" `T.append` T.pack (Numeric.showHex err "")
-       else fromPtr (castPtr pBuffer) (fromIntegral len)
+       else fromPtr pBuffer (fromIntegral len)
