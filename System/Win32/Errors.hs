@@ -100,9 +100,12 @@ failWith fn_name err_code = do
 
 formatMessage :: DWORD -> IO Text
 formatMessage err =
-    alloca $ \ pBuffer -> do
+    -- Specifying FORMAT_MESSAGE_ALLOCATE_BUFFER changes the lpBuffer argument
+    -- to a pointer to LPTSTR
+    alloca $ \ ppBuffer -> do
     len <- c_FormatMessage (FORMAT_MESSAGE_FROM_SYSTEM .|. FORMAT_MESSAGE_ALLOCATE_BUFFER)
-                             nullPtr err 0 pBuffer 0 nullPtr
-    if len == 0
+                             nullPtr err 0 (castPtr ppBuffer) 0 nullPtr
+    pBuffer <- peek ppBuffer
+    if (len == 0 || pBuffer == nullPtr)
        then return $ "Error 0x" `T.append` T.pack (Numeric.showHex err "")
        else fromPtr (castPtr pBuffer) (fromIntegral len)
