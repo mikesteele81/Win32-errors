@@ -1,7 +1,11 @@
 name:                Win32-errors
 version:             0.1.0.0
-synopsis:            Error handling for Win32 foreign calls
-description:         Error handling for Win32 foreign calls
+synopsis:            Alternative error handling for Win32 foreign calls
+description:
+    This package provides an alternative to the Win32 library's error handling
+    mechanism. It's similar in that exceptions are used to indicate failure.
+    This library uses GHC's extensible exceptions to create a more rich type,
+    which should make handling errors easier.
 license:             BSD3
 license-file:        LICENSE
 author:              Michael Steele
