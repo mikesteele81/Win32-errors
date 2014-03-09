@@ -1,7 +1,5 @@
 {-# LANGUAGE CPP #-}
-{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE TemplateHaskell #-}
 
 module System.Win32.Errors
   ( ErrCode (..)
@@ -12,7 +10,6 @@ module System.Win32.Errors
   , failIfFalse_
   , failIf
   , errorWin
-  , failWith
   ) where
 
 import Control.Exception
@@ -20,47 +17,13 @@ import Data.Bits
 import Data.Char
 import Data.Text as T
 import Data.Text.Foreign as T
-import Data.Typeable
 import Foreign
 import Numeric
 import System.Win32 (DWORD)
 import qualified System.Win32 as Win32
 
 import System.Win32.Errors.Foreign
-import System.Win32.Errors.TH
-
--- |Win32 actions typically return an error code to indicate success or failure.
--- These codes are intended to be globally unique, though there may be some overlap.
--- MSDN documents which errors may be returned by any given action.
---
--- There are thousands of errors, so it would be impractical to add them all. The `Other`
--- constructor is used to represent error codes which are not handled specifically.
-genErrCode
-
--- |Convert an `ErrCode` into a `DWORD`.
-gentoDWORD
-
--- |Convert a `DWORD` into an `ErrCode`. Values which don't have a
--- corresponding constructor will end up becoming an `Other`.
-genfromDWORD
-
-instance Storable ErrCode where
-  sizeOf _ = sizeOf (undefined :: DWORD)
-  alignment _ = alignment (undefined :: DWORD)
-  peek ptr = (peek . castPtr) ptr >>= return . fromDWORD
-  poke ptr ec = poke (castPtr ptr) (toDWORD ec)
-
--- |Exception type for Win32 errors.
-data Win32Error = Win32Error
-    { function :: Text
-    -- ^ The foreign action which triggered this exception.
-    , errCode  :: ErrCode
-    -- ^ The error code
-    , systemMessage :: Text
-    -- ^ The standard system message associated with the error code.
-    } deriving (Typeable, Show)
-
-instance Exception Win32Error
+import System.Win32.Errors.Types
 
 -- |Actions calling out to Win32 may throw exceptions. Wrapping the action in
 -- `tryWin32` will catch any `Win32Error` exceptions, but will allow any other

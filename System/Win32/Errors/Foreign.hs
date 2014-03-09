@@ -3,7 +3,7 @@
 module System.Win32.Errors.Foreign where
 
 import Foreign
-import System.Win32
+import System.Win32 (DWORD, LPTSTR)
 
 #include "windows_cconv.h"
 

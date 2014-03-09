@@ -25,6 +25,7 @@ library
     exposed-modules:
         System.Win32.Errors
     other-modules:
-        System.Win32.Errors.TH
         System.Win32.Errors.Mapping
+        System.Win32.Errors.TH
+        System.Win32.Errors.Types
     include-dirs: include
