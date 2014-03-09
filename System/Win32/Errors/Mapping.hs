@@ -8,7 +8,9 @@ import System.Win32.Types (DWORD)
 
 mapping :: [(DWORD, Name)]
 mapping = map (fmap mkName) $
-    [ (0x00000000, "Success")
+    [ -- INVALID_HANDLE_VALUE is -1 for compatibility with 16-bit windows
+      (fromIntegral (-1 :: Int), "InvalidHandleValue")
+    , (0x00000000, "Success")
     , (0x00000002, "FileNotFound")
     , (0x00000003, "PathNotFound")
     , (0x00000005, "AccessDenied")
