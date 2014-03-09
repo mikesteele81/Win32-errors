@@ -17,6 +17,7 @@ mapping = map (fmap mkName) $
     , (0x00000006, "InvalidHandle")
     , (0x000000ea, "MoreData")
     , (0x00000103, "NoMoreItems")
+    , (0x00001126, "NotAReparsePoint")
     , (0x00004e25, "DhcpSubnetNotPresent")
     , (0x00004e27, "DhcpElementCantRemove")
     , (0x00004e2a, "DhcpOptionNotPresent")
