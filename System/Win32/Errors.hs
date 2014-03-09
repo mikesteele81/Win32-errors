@@ -44,6 +44,12 @@ gentoDWORD
 -- corresponding constructor will end up becoming an `Other`.
 genfromDWORD
 
+instance Storable ErrCode where
+  sizeOf _ = sizeOf (undefined :: DWORD)
+  alignment _ = alignment (undefined :: DWORD)
+  peek ptr = (peek . castPtr) ptr >>= return . fromDWORD
+  poke ptr ec = poke (castPtr ptr) (toDWORD ec)
+
 -- |Exception type for Win32 errors.
 data Win32Error = Win32Error
     { function :: Text
