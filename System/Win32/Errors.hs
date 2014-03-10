@@ -9,6 +9,7 @@ module System.Win32.Errors
   , tryWin32
   , failIfFalse_
   , failIf
+  , failWith
   , errorWin
   ) where
 
@@ -52,17 +53,19 @@ failIf p wh act = do
 -- Calling this action when no error has occurred (0x00000000 -- ERROR_SUCCESS) will
 -- result in an exception being thrown for the `Success` error code.
 errorWin :: Text -> IO a
-errorWin fn_name = do
-    err_code <- Win32.getLastError
-    failWith fn_name err_code
+errorWin fn_name = Win32.getLastError >>= failWith' fn_name
 
--- |Throw a `Win32Error` exception for the given function name and error code.
-failWith :: Text -> DWORD -> IO a
-failWith fn_name err_code = do
+-- |Like failWith, but avoid multiple conversions to and from 'ErrCode'.
+failWith' :: Text -> DWORD -> IO a
+failWith' fn_name err_code = do
     msg <- formatMessage err_code
     -- drop trailing \n
     let msg' = T.reverse . T.dropWhile isSpace . T.reverse $ msg
     throw $ Win32Error fn_name (fromDWORD err_code) msg'
+
+-- |Throw a `Win32Error` exception for the given function name and error code.
+failWith :: Text -> ErrCode -> IO a
+failWith fn_name err_code = failWith' fn_name $ toDWORD err_code
 
 #define FORMAT_MESSAGE_FROM_SYSTEM     0x00001000
 #define FORMAT_MESSAGE_ALLOCATE_BUFFER 0x00000100
