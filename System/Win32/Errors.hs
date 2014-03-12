@@ -9,6 +9,7 @@ module System.Win32.Errors
   , tryWin32
   , failIfFalse_
   , failIf
+  , failUnlessSuccess
   , failWith
   , errorWin
   ) where
@@ -44,6 +45,15 @@ failIf :: (a -> Bool) -> Text -> IO a -> IO a
 failIf p wh act = do
     v <- act
     if p v then errorWin wh else return v
+
+-- |Perform the supplied action, and throw a `Win32Error` exception if the
+-- return code is anything other than `Success`. The supplied action returns
+-- a `DWORD` instead of an `ErrCode` so that foreign imports can be used more
+-- conveniently.
+failUnlessSuccess :: Text -> IO DWORD -> IO ()
+failUnlessSuccess fn_name act = do
+    r <- act
+    if r == toDWORD Success then return () else failWith' fn_name r
 
 -- |Windows maintains a thread-local value representing the previously triggered
 -- error code. Calling `errorWin` will look up the value, and throw a `Win32Error`
