@@ -23,7 +23,7 @@ errOther = mkName "Other"
 --         | Other !DWORD
 --         deriving (Typeable, Show)
 genErrCode :: Q [Dec]
-genErrCode = return [DataD [] errCode [] cons [''Show]]
+genErrCode = return [DataD [] errCode [] cons [''Eq, ''Show]]
   where
     con name = NormalC name []
     cons = map (con . snd) mapping ++ [NormalC errOther [(IsStrict, ConT ''DWORD)]]
