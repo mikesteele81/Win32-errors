@@ -1,6 +1,6 @@
 {-# LANGUAGE TemplateHaskell #-}
 
-module System.Win32.Errors.TH
+module System.Win32.Error.TH
   ( genErrCode
   , gentoDWORD
   , genfromDWORD
@@ -9,7 +9,7 @@ module System.Win32.Errors.TH
 import Language.Haskell.TH
 import System.Win32 (DWORD)
 
-import System.Win32.Errors.Mapping
+import System.Win32.Error.Mapping
 
 errCode :: Name
 errCode = mkName "ErrCode"
@@ -21,7 +21,7 @@ errOther = mkName "Other"
 --     data ErrCode
 --         = Success
 --         | Other !DWORD
---         deriving (Typeable, Show)
+--         deriving (Eq, Show)
 genErrCode :: Q [Dec]
 genErrCode = return [DataD [] errCode [] cons [''Eq, ''Show]]
   where

@@ -1,4 +1,4 @@
-module System.Win32.Errors.Mapping
+module System.Win32.Error.Mapping
   ( mapping
   ) where
 
@@ -15,11 +15,22 @@ mapping = map (fmap mkName) $
     , (0x00000003, "PathNotFound")
     , (0x00000005, "AccessDenied")
     , (0x00000006, "InvalidHandle")
+    , (0x0000000d, "InvalidData")
     , (0x0000000f, "InvalidDrive")
     , (0x00000010, "CurrentDirectory")
     , (0x00000012, "NoMoreFiles")
+    , (0x00000078, "CallNotImplemented")
     , (0x000000ea, "MoreData")
     , (0x00000103, "NoMoreItems")
+    , (0x00000420, "ServiceAlreadyRunning")
+    , (0x00000422, "ServiceDisabled")
+    , (0x00000424, "ServiceDoesNotExist")
+    , (0x00000425, "ServiceCannotAcceptCtrl")
+    , (0x00000426, "ServiceNotActive")
+    , (0x00000427, "FailedServiceControllerConnect")
+    , (0x00000428, "ExceptionInService")
+    , (0x0000042a, "ServiceSpecificError")
+    , (0x0000043b, "ServiceNotInExe")
     , (0x00001126, "NotAReparsePoint")
     , (0x00004e25, "DhcpSubnetNotPresent")
     , (0x00004e27, "DhcpElementCantRemove")
