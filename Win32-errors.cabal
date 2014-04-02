@@ -1,5 +1,5 @@
 name:                Win32-errors
-version:             0.1
+version:             0.2
 synopsis:            Alternative error handling for Win32 foreign calls
 description:
     This package provides an alternative to the Win32 library's error handling
@@ -19,9 +19,9 @@ copyright:     Michael Steele, 2014
 category:      System
 build-type:    Simple
 cabal-version: >=1.16
-homepage:       http://github.com/mikesteele81/win32-errors
-bug-reports:    http://github.com/mikesteele81/win32-errors/issues
-tested-with:    GHC == 7.6.3
+homepage:      http://github.com/mikesteele81/win32-errors
+bug-reports:   http://github.com/mikesteele81/win32-errors/issues
+tested-with:   GHC == 7.6.3
 extra-source-files:
     include/windows_cconv.h
 
@@ -30,7 +30,7 @@ library
     ghc-options: -Wall
     cc-options:  -fno-strict-aliasing
     build-depends:
-          base             >= 4.5  && < 4.9
+          base             >= 4.6  && < 4.8
         , template-haskell >= 2.8  && < 2.9
         , text             >= 0.11 && < 1.2
         , Win32            >= 2.2  && < 2.4
