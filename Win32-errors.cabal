@@ -1,5 +1,5 @@
 name:                Win32-errors
-version:             0.2
+version:             0.2.0.1
 synopsis:            Alternative error handling for Win32 foreign calls
 description:
     This package provides an alternative to the Win32 library's error handling
@@ -24,6 +24,7 @@ bug-reports:   http://github.com/mikesteele81/win32-errors/issues
 tested-with:   GHC == 7.6.3
 extra-source-files:
     include/windows_cconv.h
+    ChangeLog
 
 library
     default-language: Haskell2010
