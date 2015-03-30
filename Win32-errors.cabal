@@ -1,5 +1,5 @@
 name:                Win32-errors
-version:             0.2.2
+version:             0.2.2.1
 synopsis:            Alternative error handling for Win32 foreign calls
 description:
     This package provides an alternative to the Win32 library's error handling
