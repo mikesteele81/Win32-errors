@@ -31,8 +31,8 @@ library
     ghc-options: -Wall
     cc-options:  -fno-strict-aliasing
     build-depends:
-          base             >= 4.6  && < 4.8
-        , template-haskell >= 2.8  && < 2.10
+          base             >= 4.6  && < 4.9
+        , template-haskell >= 2.8  && < 2.11
         , text             >= 0.11 && < 1.3
         , Win32            >= 2.2  && < 2.4
     exposed-modules:
