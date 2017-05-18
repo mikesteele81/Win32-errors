@@ -1,5 +1,5 @@
 name:                Win32-errors
-version:             0.2.2.1
+version:             0.2.2.2
 synopsis:            Alternative error handling for Win32 foreign calls
 description:
     This package provides an alternative to the Win32 library's error handling
@@ -21,7 +21,7 @@ build-type:    Simple
 cabal-version: >=1.16
 homepage:      http://github.com/mikesteele81/win32-errors
 bug-reports:   http://github.com/mikesteele81/win32-errors/issues
-tested-with:   GHC == 7.8.3, GHC == 7.10.1
+tested-with:   GHC == 8.0.1, GHC == 8.0.2
 extra-source-files:
     include/windows_cconv.h
     ChangeLog
@@ -31,8 +31,8 @@ library
     ghc-options: -Wall
     cc-options:  -fno-strict-aliasing
     build-depends:
-          base             >= 4.6  && < 4.9
-        , template-haskell >= 2.8  && < 2.11
+          base             >= 4.6  && < 5.0
+        , template-haskell >= 2.8  && < 2.12
         , text             >= 0.11 && < 1.3
         , Win32            >= 2.2  && < 2.4
     exposed-modules:
@@ -43,3 +43,13 @@ library
         System.Win32.Error.TH
         System.Win32.Error.Types
     include-dirs: include
+
+test-suite Win32-errors-test
+  default-language:    Haskell2010
+  ghc-options: -Wall
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  other-modules:       ErrorSpec
+  main-is:             Spec.hs
+  build-depends:
+        base, hspec, QuickCheck, Win32-errors == 0.2.2.2, Win32
