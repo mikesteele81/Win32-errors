@@ -1,3 +1,7 @@
+## 0.2.3
+
+* Support for GHC 8.2.x
+
 ## 0.2.2
 
 * Support for GHC 8.0.x
@@ -10,4 +14,3 @@
 
 * Add several additional error codes.
 * Update constraints on base package.
-
