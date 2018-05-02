@@ -1,5 +1,5 @@
 name:                Win32-errors
-version:             0.2.2.2
+version:             0.2.2.3
 synopsis:            Alternative error handling for Win32 foreign calls
 description:
     This package provides an alternative to the Win32 library's error handling
@@ -32,9 +32,9 @@ library
     cc-options:  -fno-strict-aliasing
     build-depends:
           base             >= 4.6  && < 5.0
-        , template-haskell >= 2.8  && < 2.12
+        , template-haskell >= 2.8  && < 2.14
         , text             >= 0.11 && < 1.3
-        , Win32            >= 2.2  && < 2.4
+        , Win32            >= 2.2  && < 2.8
     exposed-modules:
         System.Win32.Error
         System.Win32.Error.Foreign
@@ -52,4 +52,4 @@ test-suite Win32-errors-test
   other-modules:       ErrorSpec
   main-is:             Spec.hs
   build-depends:
-        base, hspec, QuickCheck, Win32-errors == 0.2.2.2, Win32
+        base, hspec, QuickCheck, Win32-errors == 0.2.2.3, Win32

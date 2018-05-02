@@ -24,10 +24,13 @@ errOther = mkName "Other"
 --         | Other !DWORD
 --         deriving (Eq, Show)
 genErrCode :: Q [Dec]
-#if __GLASGOW_HASKELL__ < 800
-genErrCode = return [DataD [] errCode [] cons [''Eq, ''Show]]
-#else
+
+#if MIN_VERSION_template_haskell(2,12,0)
+genErrCode = return [DataD [] errCode []  Nothing cons [(DerivClause Nothing $ map ConT [''Eq, ''Show])]]
+#elif MIN_VERSION_template_haskell(2,11,0)
 genErrCode = return [DataD [] errCode []  Nothing cons (map ConT [''Eq, ''Show])]
+#else
+genErrCode = return [DataD [] errCode [] cons [''Eq, ''Show]]
 #endif
   where
     con name = NormalC name []
