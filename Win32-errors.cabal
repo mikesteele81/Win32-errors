@@ -18,13 +18,17 @@ maintainer:    mikesteele81@gmail.com
 copyright:     Michael Steele, 2014 - 2015
 category:      System
 build-type:    Simple
-cabal-version: >=1.16
+cabal-version: 1.16
 homepage:      http://github.com/mikesteele81/win32-errors
 bug-reports:   http://github.com/mikesteele81/win32-errors/issues
-tested-with:   GHC == 8.0.1, GHC == 8.0.2
+tested-with:   GHC == 8.0.1, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.3
 extra-source-files:
     include/windows_cconv.h
     ChangeLog
+
+source-repository head
+  type:     git
+  location: http://github.com/mikesteele81/win32-errors
 
 library
     default-language: Haskell2010
@@ -52,4 +56,4 @@ test-suite Win32-errors-test
   other-modules:       ErrorSpec
   main-is:             Spec.hs
   build-depends:
-        base, hspec, QuickCheck, Win32-errors == 0.2.2.3, Win32
+        base, hspec, QuickCheck, Win32-errors, Win32
