@@ -1,11 +1,16 @@
-## 0.2.4
+## 0.2.2.5
+
+* Support for GHC 8.8.x
+
+## 0.2.2.4
 
 * Support for GHC 8.6.x
 
-## 0.2.3
+## 0.2.2.3
 
 * Support for GHC 8.2.x and GHC 8.4.x
 
+## 0.2.2.1
 ## 0.2.2
 
 * Support for GHC 8.0.x

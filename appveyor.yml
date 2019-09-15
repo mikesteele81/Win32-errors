@@ -5,6 +5,8 @@ environment:
     CABOPTS:  "--store-dir=C:\\SR --http-transport=plain-http"
   matrix:
     # 64 bit builds
+    - GHCVER: "8.8.1"
+      CHOCOPTS: --no-progress        
     - GHCVER: "8.6.5"
       CHOCOPTS: --no-progress    
     - GHCVER: "8.4.3"
