@@ -5,32 +5,28 @@ environment:
     CABOPTS:  "--store-dir=C:\\SR --http-transport=plain-http"
   matrix:
     # 64 bit builds
-    - GHCVER: "8.8.1"
-      CHOCOPTS: --no-progress        
+    - GHCVER: "9.0.2"
+      CHOCOPTS: --no-progress
+    - GHCVER: "8.10.7"
+      CHOCOPTS: --no-progress
+    - GHCVER: "8.8.4"
+      CHOCOPTS: --no-progress
     - GHCVER: "8.6.5"
-      CHOCOPTS: --no-progress    
-    - GHCVER: "8.4.3"
+      CHOCOPTS: --no-progress
+    - GHCVER: "8.4.4"
       CHOCOPTS: --no-progress
     - GHCVER: "8.2.2"
       CHOCOPTS: --no-progress
     - GHCVER: "8.0.2"
-      CHOCOPTS: --no-progress
-    - GHCVER: "7.10.3.2"
-      CHOCOPTS: --no-progress
-    - GHCVER: "7.8.4.1"
       CHOCOPTS: --no-progress
     # 32 bit builds
     - GHCVER: "8.6.5"
-      CHOCOPTS: --forcex86 --no-progress    
-    - GHCVER: "8.4.3"
+      CHOCOPTS: --forcex86 --no-progress
+    - GHCVER: "8.4.4"
       CHOCOPTS: --forcex86 --no-progress
     - GHCVER: "8.2.2"
       CHOCOPTS: --forcex86 --no-progress
     - GHCVER: "8.0.2"
-      CHOCOPTS: --forcex86 --no-progress
-    - GHCVER: "7.10.3.2"
-      CHOCOPTS: --forcex86 --no-progress
-    - GHCVER: "7.8.4.1"
       CHOCOPTS: --forcex86 --no-progress
 
 cache:
