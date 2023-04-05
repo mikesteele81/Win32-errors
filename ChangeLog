@@ -1,3 +1,7 @@
+## 0.2.2.7
+
+* Changed package dependencies to support GHC 9.2.x, GHC 9.4.x and GHC 9.6.x
+
 ## 0.2.2.6
 
 * Relaxed upper bounds for package dependencies to support for GHC 9.0.x

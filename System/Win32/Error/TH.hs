@@ -49,12 +49,12 @@ gentoDWORD :: Q [Dec]
 gentoDWORD  = do
     x <- newName "x"
     return [ SigD toDWORD (AppT (AppT ArrowT (ConT errCode)) (ConT ''DWORD))
-           , FunD toDWORD $ Clause [ConP errOther [VarP x]] (NormalB (VarE x)) [] : map genClause mapping
+           , FunD toDWORD $ Clause [ConP errOther [] [VarP x]] (NormalB (VarE x)) [] : map genClause mapping
            ]
   where
     toDWORD = mkName "toDWORD"
     genClause :: (DWORD, Name) -> Clause
-    genClause (dw, err) = Clause [ConP err []] (NormalB (LitE . litDWORD $ dw)) []
+    genClause (dw, err) = Clause [ConP err [] []] (NormalB (LitE . litDWORD $ dw)) []
 
 -- fromDWORD :: DWORD -> ErrCode
 -- fromDWORD 0 = ErrorSuccess
